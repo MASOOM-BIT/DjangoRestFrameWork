@@ -51,7 +51,7 @@ class StudentDetail(APIView):
     # RetrieveModelMixin -> retrieve() -> get()
     # UpdateModelMixin -> update() -> put()
     # DestroyModelMixin -> destroy() -> delete()
-
+'''
 from rest_framework import mixins, generics
 class StudentList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Student.objects.all()
@@ -75,3 +75,32 @@ class StudentDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.D
 
     def delete(self, request, pk):
         return self.destroy(request, pk=pk)
+'''
+#Generics class based views
+#CreateAPIView -> create() -> post()
+# ListAPIView -> list() -> get()
+# RetrieveAPIView -> retrieve() -> get()
+# UpdateAPIView -> update() -> put()
+# DestroyAPIView -> destroy() -> delete()
+#ListCreateAPIView -> list() -> get(), create() -> post()
+# RetrieveUpdateAPIView -> retrieve() -> get(), update() -> put()
+# RetrieveDestroyAPIView -> retrieve() -> get(), destroy() -> delete()
+# RetrieveUpdateDestroyAPIView -> retrieve() -> get(), update() -> put(), destroy() -> delete()
+'''
+from rest_framework import generics
+class StudentList(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+'''
+#viewsets
+#ViewSet -> list(),create(),retrieve(),update(),delete()
+#ModelViewSet -> list(),create(),retrieve(),update(),delete()
+
+from rest_framework import viewsets
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
