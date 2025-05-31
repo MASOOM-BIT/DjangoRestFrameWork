@@ -19,3 +19,11 @@ class BookListView(generics.ListCreateAPIView):
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+#pagination_class
+#rest_framework.pagination.PageNumberPagination ->page
+#rest_framework.pagination.LimitOffsetPagination ->limit, offset
+#rest_framework.pagination.CursorPagination ->cursor
+
+
+
