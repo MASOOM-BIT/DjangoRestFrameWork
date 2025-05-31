@@ -100,7 +100,13 @@ class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
 #ModelViewSet -> list(),create(),retrieve(),update(),delete()
 
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination ,LimitOffsetPagination
+
+class StuentPagination(PageNumberPagination):
+    page_size = 2
+
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    pagination_class = LimitOffsetPagination # StuentPagination #pageNumberPagination
 
