@@ -101,7 +101,8 @@ class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination ,LimitOffsetPagination
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 class StuentPagination(PageNumberPagination):
     page_size = 2
 
@@ -109,4 +110,18 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     pagination_class = LimitOffsetPagination # StuentPagination #pageNumberPagination
+    #filter_backends = [DjangoFilterBackend]  # Use DjangoFilterBackend for filtering
+    #filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['name', 'score']  # Specify fields to filter by 
+    ordering = ['name']  #Default ordering field
+    #search_fields = ['^id', '^name']  # Specify fields to filter by 
 
+# to filter 
+# > pip install django-filter
+#classes > django_filters.rest_framework.DjangoFilterBackend
+#for configure Saerchfilter
+    #>'^' : starts with
+    #>'$' : Regex serch
+    #>'@' : Full text search (currently only supported by PostgreSQL)
+    #>'=' : Exact match
