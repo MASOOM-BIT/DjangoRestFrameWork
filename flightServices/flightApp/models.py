@@ -17,5 +17,5 @@ class Passanger(models.Model):
     phone = models.CharField(max_length=50)
 
 class Reservation(models.Model):
-    flight = models.OneToOneField(Flight, on_delete=models.CASCADE)
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
     passanger = models.OneToOneField(Passanger, on_delete=models.CASCADE)
