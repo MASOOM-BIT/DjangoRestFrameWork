@@ -4,7 +4,7 @@ from django.db import models
 class Flight(models.Model):
     flight_number = models.CharField(max_length=10, unique=True)
     operatingAirline = models.CharField(max_length=100)
-    departureCity = models.CharField(max_length=100)
+    departureCity = models.CharField(max_length=100)#blank=True,null=True==>rue allows the field to be empty
     arrivalCity = models.CharField(max_length=50)
     dateOfDeparture = models.DateField()
     estimatedTimeOfDeparture = models.TimeField()
