@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from flightApp.models import Flight, Passanger, Reservation
-
+import re
 class FlightSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flight
         fields = '__all__'
+    
+    def validate_flight_number(self, flight_number):
+        if(re.match(r'^[A-Z]{2}\d{4}$', flight_number) is None):
+            raise serializers.ValidationError("Flight number must be in the format 'XX1234' where 'XX' are uppercase letters and '1234' are digits.")
 
 class PassengerSerializer(serializers.ModelSerializer):
     class Meta:
