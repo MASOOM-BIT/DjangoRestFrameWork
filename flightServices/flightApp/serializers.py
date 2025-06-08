@@ -13,14 +13,14 @@ class FlightSerializer(serializers.ModelSerializer):
         fields = '__all__'
         validators = [isFlightNumberValid]
     
-    def validate_flight_number(self, flight_number):
-        print('validate_flight_number')
-        if(re.match(r'^[A-Z]{2}\d{4}$', flight_number) is None):
-            raise serializers.ValidationError("Flight number must be in the format 'XX1234' where 'XX' are uppercase letters and '1234' are digits.")
-    def validate(self, data):
-        print('validate')
-        print(data['flight_number'])
-        return data
+    # def validate_flight_number(self, flight_number):
+    #     print('validate_flight_number')
+    #     if(re.match(r'^[A-Z]{2}\d{4}$', flight_number) is None):
+    #         raise serializers.ValidationError("Flight number must be in the format 'XX1234' where 'XX' are uppercase letters and '1234' are digits.")
+    # def validate(self, data):
+    #     print('validate')
+    #     print(data['flight_number'])
+    #     return data
 
 class PassengerSerializer(serializers.ModelSerializer):
     class Meta:
