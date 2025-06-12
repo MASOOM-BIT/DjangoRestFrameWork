@@ -22,3 +22,11 @@ class Passanger(models.Model):
 class Reservation(models.Model):
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
     passanger = models.OneToOneField(Passanger, on_delete=models.CASCADE)
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def createAuthToken(sender, instance, created, **kwargs):
+    """
+    Create an auth token when a user is created.
+    """
+    if created:
+        Token.objects.create(user=instance)
