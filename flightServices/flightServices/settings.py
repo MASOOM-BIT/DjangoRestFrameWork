@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken', # For token authentication
+    'corsheaders',  # For handling CORS
     'flightApp',
 ]
 
@@ -46,6 +47,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication']
 }
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS middleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -119,7 +121,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+ALLOWED_HOSTS = ['*']  # Allow all hosts for development; restrict in production
 
+CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins for CORS; restrict in production
+#or
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',  # Example for React frontend
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
